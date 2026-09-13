@@ -1,32 +1,29 @@
+
 <!DOCTYPE html>
-<html>
+<hhtml>
     <head>
         <title>Test form</title>
     </head>
-
-    <style>
-        .container{
-            background-color: black;
-            margin: 10px;
-            padding: 10px;
-        }
-    </style>
     <script>
-        function calSum(){
-            const fnum = document.getElementById("fnum").value;
-            const snum = document.getElementById('snum').value;
-            const element = document.getElementById("finalSum")
-            
-            element.innerHTML = parseInt(fnum) + parseInt(snum);
+        async function calSum(){
+            const a = document.getElementById("a").value;
+
+            const b = document.getElementById("b").value;
+            const sum = await fetch(
+                 `http://localhost:3000/sum?a=${a}&b=${b}`
+            )
+            const data = await sum.json()
+            console.log(data)
+            document.getElementById("result").innerHTML = data.result
         }
     </script>
     <body>
-            <input id="fnum" placeholder="number 1" type="text" class="container">
-            <br><br>
-            <input id="snum" placeholder="number 2" type="text" class="container">
-            <br><br>
-            <button onclick="{calSum()}">Calculate sum</button>
-            <br><br>
-            <div id="finalSum"></div>
+        <input id="a" placeholder="1st number">
+        <br><br>
+        <input id="b" placeholder="2nd number">
+        <br><br>
+        <button onclick="calSum()">compute</button>
+        <br><br>
+        <p id="result"></p>
     </body>
-</html>
+</hhtml>
