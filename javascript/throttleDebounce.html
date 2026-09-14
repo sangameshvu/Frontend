@@ -5,6 +5,14 @@
         <title>Test form</title>
     </head>
     <script>
+        function debounceCalSum(){
+            let timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                calSum()
+            }, 100);
+
+        }
         async function calSum(){
             const a = document.getElementById("a").value;
 
@@ -18,15 +26,10 @@
         }
     </script>
     <body>
-        <input id="a" placeholder="1st number">
+        <input id="a" placeholder="1st number" oninput="debounceCalSum()">
         <br><br>
-        <input id="b" placeholder="2nd number">
-        <br><br>
-        <button onclick="calSum()">compute</button>
+        <input id="b" placeholder="2nd number" oninput="debounceCalSum()">
         <br><br>
         <p id="result"></p>
     </body>
 </hhtml>
-
-
-

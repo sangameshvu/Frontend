@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<head>
+    <title>Sangamesh V U</title>
+</head>
+<script>
+
+    // function addToDo(){
+    //     const title = document.getElementById("title").value;
+    //     const description = document.getElementById('content').value;
+
+// Method 1
+        // let outerDiv = document.getElementById('final')
+
+        // outerDiv.innerHTML += `<div>
+        //     <div>
+        //         <div>${title}</div>
+        //         <div>${description}</div>
+        //         <button>Mark Done</button>
+        //     </div>
+        //     </div>`
+        // }
+
+// Method 2:
+    //     const outerDiv = document.createElement("div");
+    //     outerDiv.innerHTML = `<div>
+    //         <div>${title}</div>
+    //         <div>${description}</div>
+    //         <button>Mark as Done</button>
+    //         </div>`;
+
+    //     document.getElementById('final').appendChild(outerDiv);
+
+// Method 3:
+    let globalId = 1
+    function markasDone(id){
+        const element = document.getElementById(id);
+        element.children[2].innerHTML = "Done!";
+    }
+    function addToDo(){
+
+        function createChild(title,description,id){
+            const child = document.createElement("div")
+            const grandChild1 = document.createElement("div")
+            grandChild1.innerHTML = title;
+            const grandChild2 = document.createElement("div")
+            grandChild2.innerHTML = description;
+            const grandChild3 = document.createElement("button")
+            grandChild3.innerHTML ="Mark Done";
+
+            grandChild3.setAttribute("onclick",`markasDone(${id})`);
+
+            child.appendChild(grandChild1);
+            child.appendChild(grandChild2);
+            child.appendChild(grandChild3);
+            child.setAttribute("id",id);
+            return child;
+        }
+        const title = document.getElementById("title").value;
+        const description = document.getElementById('content').value;
+        const parent = document.getElementById("final")
+        parent.appendChild(createChild(title,description,globalId++))
+    }
+
+
+
+</script>
+<body>
+    <input id="title" placeholder="Title">
+    <br><br>
+    <input id="content" placeholder="content">
+    <br><br>
+    <button onclick="addToDo()">Add</button>
+    <br><br>
+    <p id="final"></p>
+</body>
